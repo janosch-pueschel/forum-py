@@ -1,0 +1,15 @@
+from django.urls import path
+
+from forum_app.api.views import (
+    CommentDetailView,
+    CommentListCreateView,
+    PostDetailView,
+    PostListCreateView,
+)
+
+urlpatterns = [
+    path("posts/", PostListCreateView.as_view()),
+    path("posts/<int:pk>/", PostDetailView.as_view()),
+    path("comments/", CommentListCreateView.as_view()),
+    path("comments/<int:pk>", CommentDetailView.as_view()),
+]

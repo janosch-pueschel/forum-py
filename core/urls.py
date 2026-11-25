@@ -18,6 +18,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+import forum_app
+import forum_app.api
+import forum_app.api.urls
 import user_auth_app
 import user_auth_app.api
 import user_auth_app.api.urls
@@ -25,4 +28,5 @@ import user_auth_app.api.urls
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include(user_auth_app.api.urls)),
+    path("api/", include(forum_app.api.urls)),
 ]
