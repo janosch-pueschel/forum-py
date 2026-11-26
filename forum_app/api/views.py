@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 
 from forum_app.api.permissions import IsOwnerOrReadOnly
-from forum_app.api.serializers import PostSerializer
+from forum_app.api.serializers import CommentSerializer, PostSerializer
 from forum_app.models import Comment, Post
 
 
@@ -22,7 +22,7 @@ class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class CommentListCreateView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
-    serializer_class = PostSerializer
+    serializer_class = CommentSerializer
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -30,5 +30,5 @@ class CommentListCreateView(generics.ListCreateAPIView):
 
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
-    serializer_class = PostSerializer
+    serializer_class = CommentSerializer
     permission_classes = [IsOwnerOrReadOnly]
